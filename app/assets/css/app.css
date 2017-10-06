@@ -1,0 +1,75 @@
+*:focus {
+    outline: none;
+}
+
+input {
+    border: 2px solid rgb(222, 54, 65);
+!important;
+}
+
+#titlebar {
+    /*height: 40px;*/
+    -webkit-app-region: drag;
+}
+
+#titlebar .window-button {
+    width: 30px;
+    height: 30px;
+    transition: background-color 0.5s ease-out;
+    -webkit-app-region: no-drag;
+}
+
+#titlebar #close {
+    margin-right: 5px;
+    background: rgba(221, 40, 70, 0.4) url("../img/titlebar/close.png");
+    border-radius: 50px;
+}
+
+#titlebar #close:hover {
+    background-color: rgba(119, 0, 221, 0.4);
+    border-radius: 50px;
+}
+
+#titlebar #minimize {
+    background-image: url("../img/titlebar/minimize.png");
+}
+
+#titlebar #minimize:hover, #titlebar #maximize:hover {
+    background-color: rgba(224, 224, 224, 0.47);
+    border-radius: 50px;
+}
+
+#side-nav-header {
+    color: gray;
+    padding: 15px;
+    background-color: rgba(158, 158, 158, 0.27);
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: darkviolet;
+}
+
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
+    background-color: rgb(211, 117, 205);
+}
+
+.mark-hove-files:hover {
+    color: #333;
+}
+
+.mark-hover-dir:hover {
+    color: #b25a38;!important;
+}
+div#refresh-button{
+    font-size: 24px;color: gray;padding-top: 18px;
+    cursor: pointer;
+}
+div#refresh-button:hover{
+    color: honeydew;
+}
+/*body{*/
+    /*overflow: hidden;*/
+/*}*/
+/*#list-found-items{*/
+    /*overflow: scroll;!important;*/
+/*}*/

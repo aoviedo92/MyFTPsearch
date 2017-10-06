@@ -1,0 +1,4 @@
+<md-list-item ng-repeat="found in foundDirs">
+    <h3>{{ found.name }}</h3>
+    <p ng-click="openFtpLink(found.url)">{{ found.url}}</p>
+</md-list-item>

@@ -1,0 +1,56 @@
+<div flex id="content">
+    <div layout="column">
+        <div layout-padding>
+            <div layout="column">
+                <div layout="row">
+                    <md-checkbox ng-model="findFiles" aria-label="Buscar ficheros"
+                                 ng-change="checkboxesChanged(searchText, findFiles, findDirs)">Buscar ficheros
+                    </md-checkbox>
+                    <md-checkbox ng-model="findDirs" aria-label="Buscar directorios"
+                                 ng-change="checkboxesChanged(searchText, findFiles, findDirs)">Buscar directorios
+                    </md-checkbox>
+                </div>
+
+                <div flex="60">
+                    <!--averiguar como poner el foco-->
+                    <!--<input ng-keyup="debouncedSubmit()" ng-model="searchText" />-->
+                    <div layout="row">
+                        <!--todo buscar cuando se presione enter-->
+                        <input flex="80" ng-model="searchText" ng-keyup="debouncedSubmit(searchText)" type="text"
+                               placeholder="Buscar..." focus="true"
+                               style="width: 80%;padding: 10px 5px;border: 2px solid gray" autofocus>
+                        <md-progress-circular flex="20" ng-show="_searching" md-mode="indeterminate"
+                                              md-diameter="40"></md-progress-circular>
+                    </div>
+                </div>
+                <md-content id="list-found-items">
+                    <md-list-item class="md-2-line" ng-repeat="found in foundDirs"
+                                  style="background-color: rgba(255, 127, 80, 0.05)">
+                        <md-icon md-font-icon="glyphicon glyphicon-folder-open" style="font-size: 24px;"
+                                 class="mark-hover-dir" ng-click="openFtpLink(found.url)"></md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3 md-highlight-text="searchText">{{ found.name }}</h3>
+
+                            <p ng-click="openFtpLink(found.url)" class="mark-hover-dir"
+                               style="color: #999;text-decoration: none; font-size: 14px">{{ found.url}}</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" ng-repeat="found in foundFiles">
+                        <md-icon ng-click="openFtpLink(found.url)" md-font-icon="glyphicon glyphicon-file"
+                                 class="mark-hove-files" style="font-size: 24px;padding-top: 10px;"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{ found.name }}</h3>
+                            <!--todo averiguar como dar clic derecho descargar, o q al dar clic salga el cuadro guardar-->
+                            <p ng-click="openFtpLink(found.url_folder)" class="mark-hove-files"
+                               style="color: #999;text-decoration: none;font-size: 14px">
+                                {{found.url_folder }}</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-content>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "name": "My-FTP-Search",
+  "version": "0.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "slugify": "latest",
+    "ftp": "latest"
+  }
+}

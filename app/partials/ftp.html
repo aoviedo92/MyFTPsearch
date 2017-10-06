@@ -1,0 +1,68 @@
+<md-content flex id="content">
+    <div layout="column">
+        <md-content layout-padding class="autoScroll">
+            <div layout="row">
+                <div flex="40">
+                    <md-input-container>
+                        <label>Nombre identificador</label>
+                        <input ng-model="selected.server_name" type="text" focus="true" id="input-server-name">
+                    </md-input-container>
+                    <md-input-container md-no-float>
+                        <label>Host</label>
+                        <input ng-model="selected.host" type="text" required>
+                    </md-input-container>
+                    <md-input-container md-no-float>
+                        <label>Directorio a escanear</label>
+                        <input ng-model="selected.scan_dir" type="text">
+                    </md-input-container>
+                </div>
+                <div flex="40">
+                    <md-input-container>
+                        <label>Usuario</label>
+                        <input ng-model="selected.user" ng-required="true">
+                    </md-input-container>
+                    <md-input-container md-no-float>
+                        <label>Password</label>
+                        <input ng-model="selected.passw" type="text">
+                    </md-input-container>
+
+                </div>
+                <div flex="20">
+                    <div layout="column">
+                        <md-button class="md-primary" ng-click="saveFtp()">
+                            <md-icon md-font-icon="glyphicon glyphicon-ok" style="font-size: 22px"></md-icon>
+                            Salvar
+                        </md-button>
+                        <md-button class="md-warn" ng-click="deleteFtp($event)">
+                            <md-icon md-font-icon="glyphicon glyphicon-trash" style="font-size: 22px"></md-icon>
+                            Delete
+                        </md-button>
+                        <md-button class="md-warn md-raised md-hue-2 md-button md-ink-ripple"
+                                   ng-click="scanFtpWithPythonMethod($event)"
+                                   ng-disabled="indexing || !selected.server_name || !selected.host"
+                                   ng-show="!indexing">
+                            <span>Indexar Ftp</span>
+                            <md-tooltip>
+                                actualizado en {{selected.update_at}}
+                            </md-tooltip>
+                        </md-button>
+                        <md-progress-circular md-mode="indeterminate" md-diameter="80" ng-show="indexing"
+                        ></md-progress-circular>
+                        <!--<md-divider></md-divider>-->
+                        <md-subheader class="md-no-sticky">
+                            <p><md-icon md-font-icon="glyphicon glyphicon-file"></md-icon> {{selected.count_files}} ficheros</p>
+                            <p><md-icon md-font-icon="glyphicon glyphicon-folder-open"></md-icon> {{selected.count_dirs}} carpetas</p>
+                            <p><md-icon
+                                    md-font-icon="glyphicon glyphicon-time"></md-icon> {{selected.update_at}}</p>
+                        </md-subheader>
+
+                    </div>
+                </div>
+            </div>
+        </md-content>
+        <section layout="row" layout-sm="row" layout-align="center center" layout-wrap>
+
+        </section>
+    </div>
+
+</md-content>

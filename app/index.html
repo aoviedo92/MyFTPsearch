@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <title>My Ftp Search</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- build:css assets/css/main.css -->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="assets/css/glyphicons.css"/>
+    <link rel="stylesheet" href="assets/css/app.css"/>
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor.js -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-material/angular-material.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+    <!-- endbuild -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/ftp/ExpImportController.js"></script>
+    <!-- build:js scripts/index.js -->
+    <script src="scripts/ftp/ftpService.js"></script>
+    <script src="scripts/ftp/ftpController.js"></script>
+    <script src="scripts/ftp/ftpController.js"></script>
+    <script src="scripts/ftp/titlebarController.js"></script>
+    <!-- endbuild -->
+</head>
+<body>
+<div style="width:100%;height: 100%" layout="row" ng-controller="ftpController">
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-xl')" style="height: 100%">
+        <div id="side-nav-header">
+            <h1 style="margin: 15px 0 0 10px;" class="md-display-1">Servidores Ftp</h1>
+
+            <div layout="row">
+                <a href="#/ftp">
+                    <md-button class="md-fab" aria-label="Crear nuevo ftp" ng-click="createFtp()">
+                        <md-icon md-svg-icon="add"></md-icon>
+                    </md-button>
+                </a>
+
+                <div id="refresh-button"
+                     aria-label="refresh" ng-click="updateData()">
+                    <md-icon md-font-icon="glyphicon glyphicon-refresh"></md-icon>
+                </div>
+            </div>
+        </div>
+        <md-content layout-padding>
+            <md-list-item ng-repeat="ftp in ftps track by ftp.server_name" ng-click="selectFtp(ftp)"
+                          ng-if="ftp.server_name" class="md-2-line">
+                <md-icon md-font-icon="glyphicon glyphicon-tag"></md-icon>
+                <div class="md-list-item-text">
+                    <h3>{{ ftp.server_name}}</h3>
+
+                    <p>{{ ftp.host}}</p>
+                </div>
+                <md-switch class="md-secondary" ng-model="ftp.active"
+                           ng-change="SwitchFtp(ftp, ftp.active)"></md-switch>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-content>
+    </md-sidenav>
+    <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+        <!--md content que pase para show-server-->
+        <!--<h1><a href="#/search">link</a></h1>-->
+        <md-toolbar id="titlebar">
+            <div ng-controller="TitlebarController" class="md-toolbar-tools">
+                <h3>My FTP Search</h3>
+                <span flex></span>
+
+                <div id="window-buttons" layout="row">
+                    <div class="window-button" id="minimize" ng-click="minimizeWindow()"></div>
+                    <div class="window-button" id="maximize" ng-click="maximizeWindow()" ng-style="maximizeStyle"></div>
+                    <div class="window-button" id="close" ng-click="closeWindow()"></div>
+                </div>
+            </div>
+        </md-toolbar>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--md-icon-button-->
+                <md-button class="md-fab md-mini" style="background-color: rgba(208, 208, 208, 0.10); box-shadow: none"
+                           aria-label="Settings" ng-click="openLeftMenu()">
+                    <md-icon md-svg-icon="assets/img/icons/menu.svg"></md-icon>
+                </md-button>
+                <h2>
+                    <span>{{ toolBarTitle }}</span>
+                </h2>
+
+                <span flex></span>
+                <!--<a href="#/search">-->
+                <md-button ng-click="goSearch()" class="md-primary" aria-label="Learn More"
+                           style="color: rgba(255,255,255,0.87)">
+                    <md-icon md-font-icon="glyphicon glyphicon-search"
+                             style="color:rgba(255,255,255,0.87);font-size: 22px"></md-icon>
+                    Buscar
+                </md-button>
+                <md-menu>
+                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"
+                               aria-label="Open some menu">
+                        <md-icon md-svg-icon="./assets/img/icons/ic_more_vert_24px.svg"></md-icon>
+                    </md-button>
+                    <md-menu-content ng-controller="ExpImportController">
+                        <md-menu-item>
+                            <md-button ng-click="exportFunc($event)" aria-label="Do something">
+                                <md-icon md-font-icon="glyphicon glyphicon-export"></md-icon>
+                                <span>Exportar</span></md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="importFunc($event)" aria-label="Do something">
+                                <md-icon md-font-icon="glyphicon glyphicon-import"></md-icon>
+                                <span>Importar</span></md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <!--</a>-->
+
+
+            </div>
+        </md-toolbar>
+        <!-- <div ng-view autoscroll></div> -->
+        <ng-view autoscroll></ng-view>
+    </div>
+</div>
+
+
+
+</body>
+</html>
